@@ -181,6 +181,16 @@ class Parser
         $this->stopParsing = true;
     }
 
+    public function restart(): void
+    {
+        $this->state = self::STATE_START_DOCUMENT;
+        $this->stack = [];
+        $this->buffer = '';
+        $this->stopParsing = false;
+
+        rewind($this->stream);
+    }
+
     private function consumeChar(string $char): void
     {
         // see https://en.wikipedia.org/wiki/Byte_order_mark
